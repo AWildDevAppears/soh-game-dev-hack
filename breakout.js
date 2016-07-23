@@ -74,10 +74,11 @@ function create() {
     scoreTextRed = game.add.text(680, 550, 'score: 0', { font: "20px Arial", fill: teamRedColor, align: "left" });
     livesTextBlue = game.add.text(32, 32, 'lives: 3', { font: "20px Arial", fill: teamBlueColor, align: "left" });
     livesTextRed = game.add.text(680, 32, 'lives: 3', { font: "20px Arial", fill: teamRedColor, align: "left" });
-    introText = game.add.text(game.world.centerX, 400, '- click to start -', { font: "40px Arial", fill: "#ffffff", align: "center" });
+    introText = game.add.text(game.world.centerX, 400, '- press spacebar to start -', { font: "40px Arial", fill: "#ffffff", align: "center" });
     introText.anchor.setTo(0.5, 0.5);
 
-    game.input.onDown.add(releaseBall, this);
+    var spacebar = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+    spacebar.onDown.add(releaseBall, this);
 
 }
 
