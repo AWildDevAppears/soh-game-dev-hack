@@ -31,6 +31,9 @@ var s;
 var teamBlueColor = '#00ccff';
 var teamRedColor = '#ff0000';
 
+var cursors;
+var wasd;
+
 function create() {
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -56,6 +59,12 @@ function create() {
 
     paddle1 = new Paddle(game, 'paddle_blue_big.png', { x: 0.5, y: 0.5, name: 'blue' });
     paddle2 = new Paddle(game, 'paddle_red_big.png', { x: 0.5, y: 0.5, name: 'red' });
+
+    cursors = game.input.keyboard.createCursorKeys();
+    wasd = game.input.keyboard.addKeys({
+        left: Phaser.Keyboard.A,
+        right: Phaser.Keyboard.D,
+    })
 
     ball = new Ball(game, {
         x: game.world.centerX,
@@ -86,13 +95,6 @@ function update () {
 
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
-
-    var cursors = game.input.keyboard.createCursorKeys();
-
-    var wasd = game.input.keyboard.addKeys({
-        left: Phaser.Keyboard.A,
-        right: Phaser.Keyboard.D,
-    })
 
     if (wasd.left.isDown) {
         paddle2.x = paddle2.x - paddle2.moveRate;
