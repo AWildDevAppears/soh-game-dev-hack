@@ -126,6 +126,8 @@ function update () {
             game.physics.arcade.collide(ball, bricks, ballHitBrick, null, this);
         }
     });
+
+    game.physics.arcade.collide(paddle1, paddle2, PaddleCollisionHandler, null, this);
 }
 
 function releaseBall () {
