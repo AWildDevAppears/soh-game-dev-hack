@@ -25,6 +25,7 @@ var livesTextRed;
 var introText;
 
 var lastToucher;
+var lastEnhancement = Date.now();
 
 var s;
 
@@ -174,10 +175,16 @@ function ballHitBrick (_ball, _brick) {
     _brick.kill();
 
     if (Math.floor(Math.random() * 100) > 80) {
-        new Enhancement().trigger(
-            lastToucher,
-            lastToucher.name === paddle1.name ? paddle2 : paddle1
-        );
+        if (lastEnhancement + 10000 >= Date.now()) {
+            lastEnhancement = Date.now();
+
+            new Enhancement().trigger(
+                lastToucher,
+                lastToucher.name === paddle1.name ? paddle2 : paddle1
+            );
+        }
+
+
     }
 
     score += 10;
