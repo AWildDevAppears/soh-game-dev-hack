@@ -174,7 +174,7 @@ function ballHitBrick (_ball, _brick) {
     if (Math.floor(Math.random() * 100) > 80) {
         new Enhancement().trigger(
             lastToucher,
-            lastToucher === paddle1 ? paddle2 : paddle1
+            lastToucher.name === paddle1.name ? paddle2 : paddle1
         );
     }
 
