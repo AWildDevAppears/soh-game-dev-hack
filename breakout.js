@@ -61,11 +61,15 @@ function create() {
     paddle1 = new Paddle(game, 'paddle_blue_big.png', { x: 0.5, y: 0.5, name: 'blue' });
     paddle2 = new Paddle(game, 'paddle_red_big.png', { x: 0.5, y: 0.5, name: 'red' });
 
-    controller1 = game.input.keyboard.createCursorKeys();
+    controller1 = game.input.keyboard.addKeys({
+        left: Phaser.Keyboard.LEFT,
+        right: Phaser.Keyboard.RIGHT
+    });
     controller2 = game.input.keyboard.addKeys({
         left: Phaser.Keyboard.A,
         right: Phaser.Keyboard.D,
-    })
+        jump: Phaser.Keyboard.E
+    });
 
     ball = new Ball(game, {
         x: game.world.centerX,
@@ -109,6 +113,10 @@ function update () {
     }
     else if (controller1.right.isDown) {
         paddle1.x = paddle1.x + paddle1.moveRate;
+    }
+
+    if (controller2.jump.isDown) {
+
     }
 
     _.map([paddle1, paddle2], function(paddle) {
