@@ -54,8 +54,8 @@ function create() {
         }
     }
 
-    paddle1 = new Paddle(game, 'paddle_blue_big.png', { x: 0.5, y: 0.5 });
-    paddle2 = new Paddle(game, 'paddle_red_big.png', { x: 0.5, y: 0.5 });
+    paddle1 = new Paddle(game, 'paddle_blue_big.png', { x: 0.5, y: 0.5, name: 'blue' });
+    paddle2 = new Paddle(game, 'paddle_red_big.png', { x: 0.5, y: 0.5, name: 'red' });
 
     ball = new Ball(game, {
         x: game.world.centerX,
