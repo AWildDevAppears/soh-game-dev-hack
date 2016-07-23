@@ -9,7 +9,8 @@ function preload() {
 }
 
 var ball;
-var paddle;
+var paddle1;
+var paddle2;
 var bricks;
 
 var ballOnPaddle = true;
@@ -46,11 +47,12 @@ function create() {
         }
     }
 
-    paddle = new Paddle(game, { x: 0.5, y: 0.5 });
+    paddle1 = new Paddle(game, { x: 0.5, y: 0.5 });
+    paddle2 = new Paddle(game, { x: 0.5, y: 0.5 });
 
     ball = new Ball(game, {
         x: game.world.centerX,
-        y: paddle.y - 16,
+        y: paddle1.y - 16,
         animarions: {
             type: 'spin',
             frames: [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ],
@@ -75,27 +77,44 @@ function update () {
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
 
-    paddle.x = game.input.x;
+    var cursors = game.input.keyboard.createCursorKeys();
 
-    if (paddle.x < 24)
-    {
-        paddle.x = 24;
-    }
-    else if (paddle.x > game.width - 24)
-    {
-        paddle.x = game.width - 24;
-    }
+    var wasd = game.input.keyboard.addKeys({
+        left: Phaser.Keyboard.A,
+        right: Phaser.Keyboard.D,
+    })
 
-    if (ballOnPaddle)
-    {
-        ball.body.x = paddle.x;
+    var moveRate = 10;
+
+    if (wasd.left.isDown) {
+        paddle2.x = paddle2.x - moveRate;
     }
-    else
-    {
-        game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
-        game.physics.arcade.collide(ball, bricks, ballHitBrick, null, this);
+    else if (wasd.right.isDown) {
+        paddle2.x = paddle2.x + moveRate;
     }
 
+    if (cursors.left.isDown) {
+        paddle1.x = paddle1.x - moveRate;
+    }
+    else if (cursors.right.isDown) {
+        paddle1.x = paddle1.x + moveRate;
+    }
+
+    _.map([paddle1, paddle2], function(paddle) {
+        if (paddle.x < 24) {
+            paddle.x = 24;
+        }
+        else if (paddle.x > game.width - 24) {
+            paddle.x = game.width - 24;
+        }
+
+        if (ballOnPaddle) {
+            ball.body.x = paddle.x;
+        } else {
+            game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
+            game.physics.arcade.collide(ball, bricks, ballHitBrick, null, this);
+        }
+    });
 }
 
 function releaseBall () {
@@ -124,7 +143,7 @@ function ballLost () {
     {
         ballOnPaddle = true;
 
-        ball.reset(paddle.body.x + 16, paddle.y - 16);
+        ball.reset(paddle1.body.x + 16, paddle1.y - 16);
 
         ball.animations.stop();
     }
@@ -159,8 +178,8 @@ function ballHitBrick (_ball, _brick) {
         //  Let's move the ball back to the paddle
         ballOnPaddle = true;
         ball.body.velocity.set(0);
-        ball.x = paddle.x + 16;
-        ball.y = paddle.y - 16;
+        ball.x = paddle1.x + 16;
+        ball.y = paddle1.y - 16;
         ball.animations.stop();
 
         //  And bring the bricks back from the dead :)
