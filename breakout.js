@@ -63,12 +63,17 @@ function create() {
 
     controller1 = game.input.keyboard.addKeys({
         left: Phaser.Keyboard.LEFT,
-        right: Phaser.Keyboard.RIGHT
+        right: Phaser.Keyboard.RIGHT,
+        up: Phaser.Keyboard.UP,
+        down: Phaser.Keyboard.DOWN,
+
     });
     controller2 = game.input.keyboard.addKeys({
         left: Phaser.Keyboard.A,
         right: Phaser.Keyboard.D,
-        jump: Phaser.Keyboard.E
+        up: Phaser.Keyboard.W,
+        down: Phaser.Keyboard.S,
+        jump: Phaser.Keyboard.E,
     });
 
     ball = new Ball(game, {
@@ -101,18 +106,31 @@ function update () {
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
 
-    if (controller2.left.isDown) {
+if (controller2.left.isDown) {
         paddle2.x = paddle2.x - paddle2.moveRate;
     }
     else if (controller2.right.isDown) {
         paddle2.x = paddle2.x + paddle2.moveRate;
     }
+    else if (controller2.up.isDown) {
+        paddle2.angle += 10;
+    }
+    else if (controller2.down.isDown) {
+        paddle2.angle -= 10;
+    }
+
 
     if (controller1.left.isDown) {
         paddle1.x = paddle1.x - paddle1.moveRate;
     }
     else if (controller1.right.isDown) {
         paddle1.x = paddle1.x + paddle1.moveRate;
+    }
+     else if (controller1.up.isDown) {
+        paddle1.angle += 10;
+    }
+    else if (controller1.down.isDown) {
+        paddle1.angle -= 10;
     }
 
     if (controller2.jump.isDown) {
