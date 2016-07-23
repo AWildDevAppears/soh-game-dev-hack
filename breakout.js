@@ -17,11 +17,16 @@ var ballOnPaddle = true;
 var lives = 3;
 var score = 0;
 
-var scoreText;
-var livesText;
+var scoreTextBlue;
+var scoreTextRed;
+var livesTextBlue;
+var livesTextRed;
 var introText;
 
 var s;
+
+var teamBlueColor = '#00ccff';
+var teamRedColor = '#ff0000';
 
 function create() {
 
@@ -61,8 +66,10 @@ function create() {
 
     ball.events.onOutOfBounds.add(ballLost, this);
 
-    scoreText = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: "#ffffff", align: "left" });
-    livesText = game.add.text(680, 550, 'lives: 3', { font: "20px Arial", fill: "#ffffff", align: "left" });
+    scoreTextBlue = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: teamBlueColor, align: "left" });
+    scoreTextRed = game.add.text(680, 550, 'score: 0', { font: "20px Arial", fill: teamRedColor, align: "left" });
+    livesTextBlue = game.add.text(32, 32, 'lives: 3', { font: "20px Arial", fill: teamBlueColor, align: "left" });
+    livesTextRed = game.add.text(680, 32, 'lives: 3', { font: "20px Arial", fill: teamRedColor, align: "left" });
     introText = game.add.text(game.world.centerX, 400, '- click to start -', { font: "40px Arial", fill: "#ffffff", align: "center" });
     introText.anchor.setTo(0.5, 0.5);
 
@@ -114,7 +121,7 @@ function releaseBall () {
 function ballLost () {
 
     lives--;
-    livesText.text = 'lives: ' + lives;
+    livesTextBlue.text = 'lives: ' + lives;
 
     if (lives === 0)
     {
@@ -146,14 +153,14 @@ function ballHitBrick (_ball, _brick) {
 
     score += 10;
 
-    scoreText.text = 'score: ' + score;
+    scoreTextBlue.text = 'score: ' + score;
 
     //  Are they any bricks left?
     if (bricks.countLiving() == 0)
     {
         //  New level starts
         score += 1000;
-        scoreText.text = 'score: ' + score;
+        scoreTextBlue.text = 'score: ' + score;
         introText.text = '- Next Level -';
 
         //  Let's move the ball back to the paddle
