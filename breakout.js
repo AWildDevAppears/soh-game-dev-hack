@@ -70,7 +70,7 @@ function create() {
     ball = new Ball(game, {
         x: game.world.centerX,
         y: paddle1.y - 16,
-        animarions: {
+        animations: {
             type: 'spin',
             frames: [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ],
             frameRate: 50,
