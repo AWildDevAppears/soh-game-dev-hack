@@ -171,27 +171,34 @@ function gameOver () {
 }
 
 function ballHitBrick (_ball, _brick) {
+    if (!lastToucher) {
+        // Player 2 starts with the ball currently, so hack that in.
+        lastToucher = paddle2;
+    }
 
     _brick.kill();
+
+    var lastToucherIsPaddle1 = lastToucher.name === paddle1.name;
+    var notLastToucher = lastToucherIsPaddle1 ? paddle2 : paddle1;
 
     if (Math.floor(Math.random() * 100) > 80) {
         if (lastEnhancement + 10000 >= Date.now()) {
             lastEnhancement = Date.now();
-
             new Enhancement().trigger(
                 lastToucher,
-                lastToucher.name === paddle1.name ? paddle2 : paddle1
+                notLastToucher
             );
         }
-
-
     }
 
-    score += 10;
+    lastToucher.score += 10;
 
-    scoreTextBlue.text = 'score: ' + score;
+    var scoreStr = 'score: ' + lastToucher.score;
+    console.log(scoreStr) // eslint-disable-line no-console
+    lastToucherIsPaddle1 ? scoreTextBlue.text = scoreStr : scoreTextRed.text = scoreStr;
 
     //  Are they any bricks left?
+    //  TODO remove this and show who wins
     if (bricks.countLiving() == 0)
     {
         //  New level starts

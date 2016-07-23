@@ -8,6 +8,7 @@ var Paddle = function (game, asset, options) {
     paddle.body.bounce.set(1);
     paddle.body.immovable = true;
     paddle.moveRate = 10;
+    paddle.score = 0;
 
     paddle.name = options.name;
 
