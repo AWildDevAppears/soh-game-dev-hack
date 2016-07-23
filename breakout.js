@@ -104,7 +104,7 @@ function create() {
 function update () {
 
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
-    // s.tilePosition.x += (game.input.speed.x / 2);
+    s.tilePosition.x ++;
 
 if (controller2.left.isDown) {
         paddle2.x = paddle2.x - paddle2.moveRate;
