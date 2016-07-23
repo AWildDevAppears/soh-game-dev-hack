@@ -145,7 +145,7 @@
 	"sourceSize": {"w":32,"h":64}
 },
 {
-	"filename": "paddle_big.png",
+	"filename": "paddle_blue_big.png",
 	"frame": {"x":98,"y":40,"w":48,"h":16},
 	"rotated": false,
 	"trimmed": false,
@@ -153,8 +153,24 @@
 	"sourceSize": {"w":48,"h":16}
 },
 {
-	"filename": "paddle_small.png",
+	"filename": "paddle_blue_small.png",
 	"frame": {"x":148,"y":38,"w":32,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":16},
+	"sourceSize": {"w":32,"h":16}
+},
+{
+	"filename": "paddle_red_big.png",
+	"frame": {"x":98,"y":58,"w":48,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":16},
+	"sourceSize": {"w":48,"h":16}
+},
+{
+	"filename": "paddle_red_small.png",
+	"frame": {"x":148,"y":56,"w":32,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":16},

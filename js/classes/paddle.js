@@ -1,5 +1,5 @@
-var Paddle = function (game, anchors) {
-    var paddle = game.add.sprite(game.world.centerX, 500, 'breakout', 'paddle_big.png');
+var Paddle = function (game, asset, anchors) {
+    var paddle = game.add.sprite(game.world.centerX, 500, 'breakout', asset);
     paddle.anchor.setTo(anchors.x, anchors.y);
 
     game.physics.enable(paddle, Phaser.Physics.ARCADE);
