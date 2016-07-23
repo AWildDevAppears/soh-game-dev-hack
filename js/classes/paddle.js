@@ -7,6 +7,7 @@ var Paddle = function (game, anchors) {
     paddle.body.collideWorldBounds = true;
     paddle.body.bounce.set(1);
     paddle.body.immovable = true;
+    paddle.moveRate = 10;
 
     return paddle;
 }

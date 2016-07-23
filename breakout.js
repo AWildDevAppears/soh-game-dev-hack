@@ -91,20 +91,18 @@ function update () {
         right: Phaser.Keyboard.D,
     })
 
-    var moveRate = 10;
-
     if (wasd.left.isDown) {
-        paddle2.x = paddle2.x - moveRate;
+        paddle2.x = paddle2.x - paddle2.moveRate;
     }
     else if (wasd.right.isDown) {
-        paddle2.x = paddle2.x + moveRate;
+        paddle2.x = paddle2.x + paddle2.moveRate;
     }
 
     if (cursors.left.isDown) {
-        paddle1.x = paddle1.x - moveRate;
+        paddle1.x = paddle1.x - paddle1.moveRate;
     }
     else if (cursors.right.isDown) {
-        paddle1.x = paddle1.x + moveRate;
+        paddle1.x = paddle1.x + paddle1.moveRate;
     }
 
     _.map([paddle1, paddle2], function(paddle) {
