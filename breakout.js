@@ -207,20 +207,19 @@ function ballHitBrick (_ball, _brick) {
     //  TODO remove this and show who wins
     if (bricks.countLiving() == 0)
     {
-        //  New level starts
-        score += 1000;
-        scoreTextBlue.text = 'score: ' + score;
-        introText.text = '- Next Level -';
+        var scoreText;
+        if (paddle1.score > paddle2.score) {
+            scoreText = 'Blue wins!';
+        }
+        else if (paddle1.score == paddle2.score) {
+            scoreText = "It's a draw!";
+        }
+        else {
+            scoreText = 'Red wins!';
+        }
 
-        //  Let's move the ball back to the paddle
-        ballOnPaddle = true;
-        ball.body.velocity.set(0);
-        ball.x = paddle1.x + 16;
-        ball.y = paddle1.y - 16;
-        ball.animations.stop();
-
-        //  And bring the bricks back from the dead :)
-        bricks.callAll('revive');
+        var winText = game.add.text(game.world.centerX, 400, winText, { font: "40px Arial", fill: "#ffffff", align: "center" });
+        winText.anchor.setTo(0.5, 0.5);
     }
 
 }
