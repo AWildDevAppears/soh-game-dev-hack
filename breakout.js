@@ -32,8 +32,8 @@ var s;
 var teamBlueColor = '#00ccff';
 var teamRedColor = '#ff0000';
 
-var cursors;
-var wasd;
+var controller1;
+var controller2;
 
 function create() {
 
@@ -61,8 +61,8 @@ function create() {
     paddle1 = new Paddle(game, 'paddle_blue_big.png', { x: 0.5, y: 0.5, name: 'blue' });
     paddle2 = new Paddle(game, 'paddle_red_big.png', { x: 0.5, y: 0.5, name: 'red' });
 
-    cursors = game.input.keyboard.createCursorKeys();
-    wasd = game.input.keyboard.addKeys({
+    controller1 = game.input.keyboard.createCursorKeys();
+    controller2 = game.input.keyboard.addKeys({
         left: Phaser.Keyboard.A,
         right: Phaser.Keyboard.D,
     })
@@ -97,17 +97,17 @@ function update () {
     //  Fun, but a little sea-sick inducing :) Uncomment if you like!
     // s.tilePosition.x += (game.input.speed.x / 2);
 
-    if (wasd.left.isDown) {
+    if (controller2.left.isDown) {
         paddle2.x = paddle2.x - paddle2.moveRate;
     }
-    else if (wasd.right.isDown) {
+    else if (controller2.right.isDown) {
         paddle2.x = paddle2.x + paddle2.moveRate;
     }
 
-    if (cursors.left.isDown) {
+    if (controller1.left.isDown) {
         paddle1.x = paddle1.x - paddle1.moveRate;
     }
-    else if (cursors.right.isDown) {
+    else if (controller1.right.isDown) {
         paddle1.x = paddle1.x + paddle1.moveRate;
     }
 
