@@ -42,20 +42,11 @@ function create() {
     {
         for (var x = 0; x < 15; x++)
         {
-            brick = bricks.create(120 + (x * 36), 100 + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
-            brick.body.bounce.set(1);
-            brick.body.immovable = true;
+            brick = new Brick(bricks, 120 + (x * 36), 100 + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
         }
     }
 
-    paddle = game.add.sprite(game.world.centerX, 500, 'breakout', 'paddle_big.png');
-    paddle.anchor.setTo(0.5, 0.5);
-
-    game.physics.enable(paddle, Phaser.Physics.ARCADE);
-
-    paddle.body.collideWorldBounds = true;
-    paddle.body.bounce.set(1);
-    paddle.body.immovable = true;
+    paddle = new Paddle(game, { x: 0.5, y: 0.5 });
 
     ball = game.add.sprite(game.world.centerX, paddle.y - 16, 'breakout', 'ball_1.png');
     ball.anchor.set(0.5);
@@ -134,7 +125,7 @@ function ballLost () {
         ballOnPaddle = true;
 
         ball.reset(paddle.body.x + 16, paddle.y - 16);
-        
+
         ball.animations.stop();
     }
 
@@ -143,7 +134,7 @@ function ballLost () {
 function gameOver () {
 
     ball.body.velocity.setTo(0, 0);
-    
+
     introText.text = 'Game Over!';
     introText.visible = true;
 

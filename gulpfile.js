@@ -6,11 +6,11 @@ var watch     = require('gulp-watch');
 
 
 var paths = {
-  templates:  ['./**/*.html']
+  templates:  ['./**/*.html'],
+  js: ['./js/**/*.js']
 };
 
 gulp.task('watch', function () {
-  gulp.watch(paths.sass, ['sass']);
 });
 
 gulp.task('server', function() {
