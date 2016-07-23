@@ -1,0 +1,23 @@
+{
+  "name": "soh-game-dev-hack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "breakout.js",
+  "scripts": {
+    "start": "python -m SimpleHTTPServer 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WoJBurgess/soh-game-dev-hack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WoJBurgess/soh-game-dev-hack/issues"
+  },
+  "homepage": "https://github.com/WoJBurgess/soh-game-dev-hack#readme",
+  "dependencies": {
+    "phaser": "^2.6.1"
+  }
+}
