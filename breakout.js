@@ -24,6 +24,8 @@ var livesTextBlue;
 var livesTextRed;
 var introText;
 
+var lastToucher;
+
 var s;
 
 var teamBlueColor = '#00ccff';
@@ -168,6 +170,13 @@ function ballHitBrick (_ball, _brick) {
 
     _brick.kill();
 
+    if (Math.floor(Math.random() * 100) > 80) {
+        new Enhancement().trigger(
+            lastToucher,
+            lastToucher === paddle1 ? paddle2 : paddle1
+        );
+    }
+
     score += 10;
 
     scoreTextBlue.text = 'score: ' + score;
@@ -196,6 +205,7 @@ function ballHitBrick (_ball, _brick) {
 function ballHitPaddle (_ball, _paddle) {
 
     var diff = 0;
+    lastToucher = _paddle;
 
     if (_ball.x < _paddle.x)
     {
