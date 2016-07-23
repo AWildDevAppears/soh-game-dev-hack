@@ -15,13 +15,10 @@ var bricks;
 
 var ballOnPaddle = true;
 
-var lives = 3;
 var score = 0;
 
 var scoreTextBlue;
 var scoreTextRed;
-var livesTextBlue;
-var livesTextRed;
 var introText;
 
 var lastToucher;
@@ -91,8 +88,6 @@ function create() {
 
     scoreTextBlue = game.add.text(32, 550, 'score: 0', { font: "20px Arial", fill: teamBlueColor, align: "left" });
     scoreTextRed = game.add.text(680, 550, 'score: 0', { font: "20px Arial", fill: teamRedColor, align: "left" });
-    livesTextBlue = game.add.text(32, 32, 'lives: 3', { font: "20px Arial", fill: teamBlueColor, align: "left" });
-    livesTextRed = game.add.text(680, 32, 'lives: 3', { font: "20px Arial", fill: teamRedColor, align: "left" });
     introText = game.add.text(game.world.centerX, 400, '- press spacebar to start -', { font: "40px Arial", fill: "#ffffff", align: "center" });
     introText.anchor.setTo(0.5, 0.5);
 
@@ -133,8 +128,10 @@ if (controller2.left.isDown) {
         paddle1.angle -= 10;
     }
 
-    if (controller2.jump.isDown) {
+    // if (controller2.jump.isDown) {
 
+    if (!lastToucher) {
+        lastToucher = paddle2;
     }
 
     _.map([paddle1, paddle2], function(paddle) {
@@ -146,7 +143,7 @@ if (controller2.left.isDown) {
         }
 
         if (ballOnPaddle) {
-            ball.body.x = paddle.x;
+            ball.body.x = lastToucher.x;
         } else {
             game.physics.arcade.collide(ball, paddle, ballHitPaddle, null, this);
             game.physics.arcade.collide(ball, bricks, ballHitBrick, null, this);
@@ -154,6 +151,14 @@ if (controller2.left.isDown) {
     });
 
     game.physics.arcade.collide(paddle1, paddle2, PaddleCollisionHandler, null, this);
+}
+
+function lastToucherIsPaddle1() {
+    return lastToucher.name === paddle1.name;
+}
+
+function notLastToucher() {
+    return lastToucherIsPaddle1() ? paddle2 : paddle1;
 }
 
 function releaseBall () {
@@ -171,50 +176,24 @@ function releaseBall () {
 
 function ballLost () {
 
-    lives--;
-    livesTextBlue.text = 'lives: ' + lives;
+    ballOnPaddle = true;
 
-    if (lives === 0)
-    {
-        gameOver();
-    }
-    else
-    {
-        ballOnPaddle = true;
+    ball.reset(lastToucher.body.x + 16, lastToucher.y - 16);
 
-        ball.reset(paddle1.body.x + 16, paddle1.y - 16);
-
-        ball.animations.stop();
-    }
-
-}
-
-function gameOver () {
-
-    ball.body.velocity.setTo(0, 0);
-
-    introText.text = 'Game Over!';
-    introText.visible = true;
+    ball.animations.stop();
 
 }
 
 function ballHitBrick (_ball, _brick) {
-    if (!lastToucher) {
-        // Player 2 starts with the ball currently, so hack that in.
-        lastToucher = paddle2;
-    }
 
     _brick.kill();
-
-    var lastToucherIsPaddle1 = lastToucher.name === paddle1.name;
-    var notLastToucher = lastToucherIsPaddle1 ? paddle2 : paddle1;
 
     if (Math.floor(Math.random() * 100) > 80) {
         if (lastEnhancement + 10000 >= Date.now()) {
             lastEnhancement = Date.now();
             new Enhancement().trigger(
                 lastToucher,
-                notLastToucher
+                notLastToucher()
             );
         }
     }
@@ -222,8 +201,7 @@ function ballHitBrick (_ball, _brick) {
     lastToucher.score += 10;
 
     var scoreStr = 'score: ' + lastToucher.score;
-    console.log(scoreStr) // eslint-disable-line no-console
-    lastToucherIsPaddle1 ? scoreTextBlue.text = scoreStr : scoreTextRed.text = scoreStr;
+    lastToucherIsPaddle1() ? scoreTextBlue.text = scoreStr : scoreTextRed.text = scoreStr;
 
     //  Are they any bricks left?
     //  TODO remove this and show who wins
