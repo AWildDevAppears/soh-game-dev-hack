@@ -48,16 +48,16 @@ function create() {
 
     paddle = new Paddle(game, { x: 0.5, y: 0.5 });
 
-    ball = game.add.sprite(game.world.centerX, paddle.y - 16, 'breakout', 'ball_1.png');
-    ball.anchor.set(0.5);
-    ball.checkWorldBounds = true;
-
-    game.physics.enable(ball, Phaser.Physics.ARCADE);
-
-    ball.body.collideWorldBounds = true;
-    ball.body.bounce.set(1);
-
-    ball.animations.add('spin', [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ], 50, true, false);
+    ball = new Ball(game, {
+        x: game.world.centerX,
+        y: paddle.y - 16,
+        animarions: {
+            type: 'spin',
+            frames: [ 'ball_1.png', 'ball_2.png', 'ball_3.png', 'ball_4.png', 'ball_5.png' ],
+            frameRate: 50,
+            loop: true
+        }
+    }, 'breakout', 'ball_1.png');
 
     ball.events.onOutOfBounds.add(ballLost, this);
 
